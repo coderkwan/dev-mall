@@ -1,8 +1,10 @@
 import styles from "../styles/Home.module.scss";
 import Image from "next/image";
 import illustration from "../public/images/png.png";
-
+import TechCard from "../components/TechCard";
+import { useRouter } from "next/router";
 export default function Home() {
+  const router = useRouter();
   return (
     <div className={styles.container}>
       <section className={styles.showcase}>
@@ -13,8 +15,22 @@ export default function Home() {
             power your next website or app.
           </p>
           <div className={styles.showcase__buttons}>
-            <button className={styles.buttonPrimary}>Browse tech</button>
-            <button className={styles.buttonSecondary}>Post tech</button>
+            <button
+              onClick={() => {
+                router.push("/tech/2");
+              }}
+              className={styles.buttonPrimary}
+            >
+              Browse tech
+            </button>
+            <button
+              onClick={() => {
+                router.push("/tech/2");
+              }}
+              className={styles.buttonSecondary}
+            >
+              Post tech
+            </button>
           </div>
         </div>
         <div className={styles.showcase__image}>
@@ -56,18 +72,7 @@ export default function Home() {
           <button>Browse more</button>
         </div>
         <div className={styles.random__card}>
-          <div className={styles.card}>
-            <div className={styles.card__image}></div>
-            <h4>Prisma</h4>
-            <p>
-              Prisma helps app developers build faster and make fewer errors
-              with an open source database toolkit for PostgreSQL, MySQL, SQL
-              Server, SQLite, MongoDB and CockroachDB.
-            </p>
-            <div className={styles.card__category}>
-              <p>Object Relational Mapping</p>
-            </div>
-          </div>
+          <TechCard />
         </div>
       </section>
     </div>
