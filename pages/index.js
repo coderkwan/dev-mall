@@ -3,7 +3,26 @@ import Image from "next/image";
 import illustration from "../public/images/png.png";
 import TechCard from "../components/TechCard";
 import { useRouter } from "next/router";
+import { supabase } from "../utils/supabase";
+import { useEffect } from "react";
+
 export default function Home() {
+  // async function fetchData() {
+  //   try {
+  //     const { data, error } = await supabase.from("tech").select();
+  //     if (data) {
+  //       console.log(data);
+  //     }
+  //     throw error;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
   const router = useRouter();
   return (
     <div className={styles.container}>
