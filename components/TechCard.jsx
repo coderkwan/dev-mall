@@ -1,10 +1,17 @@
 import styles from "./styles/techcard.module.scss";
 import Image from "next/image";
 import comment from "../public/icons/comment.png";
+import { useRouter } from "next/router";
 
-function TechCard() {
+function TechCard({ id }) {
+  const router = useRouter();
   return (
-    <div className={styles.card}>
+    <div
+      onClick={() => {
+        router.push(`/tech/${id}`);
+      }}
+      className={styles.card}
+    >
       <div className={styles.card__image}></div>
       <div className={styles.card__hearder}>
         <h4>Supabase</h4>

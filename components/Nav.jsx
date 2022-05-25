@@ -14,17 +14,17 @@ function Nav() {
         </Link>
       </div>
       <div className={styles.nav__links}>
-        <Link href="/tech/1">
+        <Link href="/techs">
           <div className={styles.nav__link}>
             <p>Browse tech</p>
           </div>
         </Link>
-        <Link href="/tech/1">
+        <Link href="/login">
           <div className={styles.nav__link}>
             <p>Login</p>
           </div>
         </Link>
-        <Link href="/tech/1">
+        <Link href="/register">
           <div className={styles.nav__link}>
             <p>Register</p>
           </div>
