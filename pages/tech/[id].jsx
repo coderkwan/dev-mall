@@ -13,6 +13,27 @@ import internet from "../../public/icons/internetlt.png";
 export default function index() {
   const router = useRouter();
   const [data, setData] = useState();
+  const [loggedError, setLoggedError] = useState();
+
+  async function postComment(e) {
+    e.preventDefault();
+    const session = supabase.auth.session();
+    if (session) {
+      try {
+        const { data, error } = await supabase
+          .from("cities")
+          .update({ name: "Middle Earth" })
+          .match({ name: "Auckland" });
+        if (data) {
+        }
+        throw error;
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setLoggedError(true);
+    }
+  }
 
   async function fetchData() {
     try {
@@ -83,10 +104,11 @@ export default function index() {
             <h3>3</h3>
             <p>Reviews</p>
           </div>
-          <div className={styles.post}>
-            <input type="text" placeholder="Type your review" />
-            <button>Post</button>
-          </div>
+          {loggedError && <small>Please login to post a review!</small>}
+          <form onSubmit={postComment} className={styles.post}>
+            <input required={true} type="text" placeholder="Type your review" />
+            <button type="submit">Post</button>
+          </form>
           <div className={styles.comments}>
             <div className={styles.comments__card}>
               <div className={styles.comments__hearder}>

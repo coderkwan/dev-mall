@@ -20,7 +20,7 @@ export default function Home() {
           <div className={styles.showcase__buttons}>
             <button
               onClick={() => {
-                router.push("/tech/2");
+                router.push("/techs");
               }}
               className={styles.buttonPrimary}
             >
@@ -28,7 +28,7 @@ export default function Home() {
             </button>
             <button
               onClick={() => {
-                router.push("/tech/2");
+                router.push("/post");
               }}
               className={styles.buttonSecondary}
             >

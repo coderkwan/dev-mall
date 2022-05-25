@@ -4,12 +4,14 @@ import Link from "next/link";
 import logo from "../public/devmall.png";
 import menu from "../public/icons/menudk.png";
 import close from "../public/icons/close.png";
+import { supabase } from "../utils/supabase";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 
 function Nav() {
   const router = useRouter();
   const links = useRef();
+  const [logged, setLogged] = useState(false);
   const [open, setOpen] = useState(false);
 
   function openMenu() {
@@ -19,7 +21,33 @@ function Nav() {
     setOpen(false);
   }
 
+  async function logout() {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        throw error;
+      }
+      router.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function checkSession() {
+    try {
+      const session = supabase.auth.session();
+      if (session) {
+        setLogged(true);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
+    checkSession();
     if (open) {
       links.current.style.display = "flex";
     } else {
@@ -41,11 +69,36 @@ function Nav() {
               <p>Browse tech</p>
             </div>
           </Link>
-          <Link href="/register">
+          <Link href="/post">
             <div className={styles.nav__link}>
-              <p>Login</p>
+              <p>Post tech</p>
             </div>
           </Link>
+          {!logged ? (
+            <>
+              <Link href="/login">
+                <div className={styles.nav__link}>
+                  <p>Login</p>
+                </div>
+              </Link>
+              <Link href="/register">
+                <div className={styles.nav__link}>
+                  <p>Register</p>
+                </div>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href="/profile">
+                <div className={styles.nav__link}>
+                  <p>Profile</p>
+                </div>
+              </Link>
+              <div onClick={logout} className={styles.nav__link}>
+                <p>Logout</p>
+              </div>
+            </>
+          )}
         </div>
         <div className={styles.nav__Moblinks}>
           <div onClick={openMenu} className={styles.menu}>
@@ -62,16 +115,42 @@ function Nav() {
                   <p>Browse tech</p>
                 </div>
               </Link>
-              <Link href="/login">
+              <Link href="/post">
                 <div onClick={closeMenu} className={styles.mobileLinks__link}>
-                  <p>Login</p>
+                  <p>Post tech</p>
                 </div>
               </Link>
-              <Link href="/register">
-                <div onClick={closeMenu} className={styles.mobileLinks__link}>
-                  <p>Register</p>
-                </div>
-              </Link>
+              {!logged ? (
+                <>
+                  <Link href="/login">
+                    <div
+                      onClick={closeMenu}
+                      className={styles.mobileLinks__link}
+                    >
+                      <p>Login</p>
+                    </div>
+                  </Link>
+                  <Link href="/register">
+                    <div
+                      onClick={closeMenu}
+                      className={styles.mobileLinks__link}
+                    >
+                      <p>Register</p>
+                    </div>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link href="/profile">
+                    <div className={styles.mobileLinks__link}>
+                      <p>Profile</p>
+                    </div>
+                  </Link>
+                  <div onClick={logout} className={styles.mobileLinks__link}>
+                    <p>Logout</p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
