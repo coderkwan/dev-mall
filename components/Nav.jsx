@@ -41,14 +41,9 @@ function Nav() {
               <p>Browse tech</p>
             </div>
           </Link>
-          <Link href="/login">
-            <div className={styles.nav__link}>
-              <p>Login</p>
-            </div>
-          </Link>
           <Link href="/register">
             <div className={styles.nav__link}>
-              <p>Register</p>
+              <p>Login</p>
             </div>
           </Link>
         </div>
