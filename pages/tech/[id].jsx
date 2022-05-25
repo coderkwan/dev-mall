@@ -61,7 +61,7 @@ export default function index() {
         </div>
         <div className={styles.tech__reviews}>
           <div className={styles.count}>
-            <Image src={comment} alt="reviews" width={30} height={30} />
+            <Image src={comment} alt="reviews" width={25} height={25} />
             <h3>3</h3>
             <p>Reviews</p>
           </div>
