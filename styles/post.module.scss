@@ -5,6 +5,12 @@
   .container {
     max-width: 550px;
     width: 100%;
+    h3 {
+      font-size: 1.3rem;
+      font-weight: 300;
+      text-align: center;
+      color: rgb(23, 23, 58);
+    }
     form {
       display: flex;
       flex-direction: column;
@@ -12,6 +18,10 @@
       gap: 8px;
       .inputAndLabel {
         width: 100%;
+      }
+      p {
+        color: green;
+        margin: 0;
       }
       input,
       textarea {
@@ -27,7 +37,7 @@
         padding: 16px 30px;
         width: 100%;
         cursor: pointer;
-        background-color: black;
+        background-color: rgb(48, 49, 73);
         color: white;
         border: none;
         transition: all 0.2s ease;

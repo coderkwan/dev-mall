@@ -32,7 +32,7 @@ export default function Home() {
               }}
               className={styles.buttonSecondary}
             >
-              Post tech
+              Recommend
             </button>
           </div>
         </div>

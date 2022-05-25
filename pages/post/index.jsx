@@ -6,6 +6,29 @@ import { supabase } from "../../utils/supabase";
 
 function index() {
   const router = useRouter();
+  const [done, setDone] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  async function recommend(e) {
+    e.preventDefault();
+    setDone(false);
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("recommendation")
+        .insert([
+          { name: e.target.name.value, website: e.target.website.value },
+        ]);
+      if (data) {
+        setDone(true);
+      }
+      throw error;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   useEffect(() => {
     const session = supabase.auth.session();
@@ -13,35 +36,22 @@ function index() {
       router.push("/login");
     }
   }, []);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <form action="">
+        <h3>Recommed a Library or framework or technology we should list.</h3>
+        <form onSubmit={recommend}>
           <div className={styles.inputAndLabel}>
             <label htmlFor="">Name</label>
-            <input type="text" name="name" />
+            <input required={true} type="text" name="name" />
           </div>
           <div className={styles.inputAndLabel}>
-            <label htmlFor="">Description</label>
-            <textarea rows={3} type="text" name="description" />
+            <label htmlFor="">Website</label>
+            <input required={true} type="url" name="website" />
           </div>
-          <div className={styles.inputAndLabel}>
-            <label htmlFor="">Cartegory</label>
-            <input type="text" name="category" />
-          </div>
-          <div className={styles.inputAndLabel}>
-            <label htmlFor="">Tags</label>
-            <input type="text" name="tag" />
-          </div>
-          <div className={styles.inputAndLabel}>
-            <label htmlFor="">Logo</label>
-            <input type="file" name="logo" />
-          </div>
-          <div className={styles.inputAndLabel}>
-            <label htmlFor="">Banner</label>
-            <input type="file" name="banner" />
-          </div>
-          <button>Post</button>
+          {done && <p>Recommendation submited sucessfully!</p>}
+          <button type="submit">{loading ? "Loading..." : "Submit"}</button>
         </form>
       </div>
     </div>

@@ -71,7 +71,7 @@ function Nav() {
           </Link>
           <Link href="/post">
             <div className={styles.nav__link}>
-              <p>Post tech</p>
+              <p>Recommend</p>
             </div>
           </Link>
           {!logged ? (
