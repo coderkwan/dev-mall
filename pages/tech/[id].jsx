@@ -40,7 +40,7 @@ export default function index() {
           <div className={styles.header}>
             <h2>Supabase</h2>
             <p>Object Relational Mapping</p>
-            <div className={styles.hearder__tags}>
+            <div className={styles.tags}>
               <p>Database</p>
               <p>Storage</p>
               <p>ORM</p>
@@ -62,7 +62,7 @@ export default function index() {
         <div className={styles.tech__reviews}>
           <div className={styles.count}>
             <Image src={comment} alt="reviews" width={30} height={30} />
-            <p>3</p>
+            <h3>3</h3>
             <p>Reviews</p>
           </div>
           <div className={styles.post}>
@@ -70,6 +70,30 @@ export default function index() {
             <button>Post</button>
           </div>
           <div className={styles.comments}>
+            <div className={styles.comments__card}>
+              <div className={styles.comments__hearder}>
+                <p>
+                  by <span>Kwanele</span> 23 March 2021
+                </p>
+              </div>
+              <p>
+                Supabase is an open source Firebase alternative. Start your
+                project with a Postgres Database, Authentication, instant APIs,
+                Realtime subscriptions and Storage.
+              </p>
+            </div>
+            <div className={styles.comments__card}>
+              <div className={styles.comments__hearder}>
+                <p>
+                  by <span>Kwanele</span> 23 March 2021
+                </p>
+              </div>
+              <p>
+                Supabase is an open source Firebase alternative. Start your
+                project with a Postgres Database, Authentication, instant APIs,
+                Realtime subscriptions and Storage.
+              </p>
+            </div>
             <div className={styles.comments__card}>
               <div className={styles.comments__hearder}>
                 <p>

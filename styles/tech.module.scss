@@ -1,0 +1,119 @@
+.container {
+  display: flex;
+  justify-content: center;
+  .tech {
+    max-width: 800px;
+    &__cover {
+      height: 200px;
+      background-color: black;
+      .image {
+      }
+    }
+    /*--------------*/
+    &__details {
+      margin-bottom: 50px;
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        h2 {
+          font-size: 2rem;
+          margin: 5px 0;
+          text-transform: uppercase;
+        }
+        p {
+          background-color: rgb(105, 72, 133);
+          padding: 5px 10px;
+          color: white;
+        }
+        .tags {
+          display: flex;
+          gap: 12px;
+          p {
+            background-color: rgb(52, 54, 77);
+            border-radius: 18px;
+            font-size: 14px;
+          }
+        }
+      }
+      .details {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        p {
+          margin: 0;
+        }
+        &__links {
+          display: flex;
+          gap: 12px;
+          a {
+            background-color: blue;
+            color: white;
+            padding: 6px 12px;
+          }
+        }
+      }
+    }
+    /*-------------*/
+    &__reviews {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      .count {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        h3 {
+          color: rgb(230, 46, 230);
+          margin: 0;
+        }
+        p {
+          margin: 0;
+        }
+      }
+      .post {
+        display: flex;
+        width: 100%;
+        gap: 8px;
+        input {
+          width: 100%;
+          font-family: inherit;
+          font-size: 18px;
+          padding: 12px;
+          border: 2px solid rgba(58, 57, 88, 0.582);
+          border-radius: 8px;
+        }
+        button {
+          border: none;
+          border-radius: 8px;
+          padding: 8px 12px;
+          font-family: inherit;
+          background-color: rgb(117, 121, 156);
+          font-weight: 400;
+          color: white;
+          font-size: 18px;
+          cursor: pointer;
+        }
+      }
+      .comments {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        &__card {
+          border-radius: 12px;
+          background-color: rgb(209, 210, 224);
+          padding: 6px 12px;
+        }
+        &__hearder {
+          color: rgb(82, 50, 158);
+          p {
+            font-size: 14px;
+          }
+          span {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+}
