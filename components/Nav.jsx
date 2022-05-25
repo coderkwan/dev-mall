@@ -8,9 +8,7 @@ function Nav() {
     <div className={styles.nav}>
       <div className={styles.nav__logo}>
         <Link href="/">
-          <>
-            <Image src={logo} height={30} width={92.7} alt="logo" />
-          </>
+          <Image src={logo} height={30} width={92.7} alt="logo" />
         </Link>
       </div>
       <div className={styles.nav__links}>
