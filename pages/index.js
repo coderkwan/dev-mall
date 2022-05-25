@@ -72,11 +72,12 @@ export default function Home() {
             You can see reviews on your favourite tech, you can also drop a
             review
           </p>
-          <button>Browse more</button>
+          <button className={styles.random__btnPc}>Browse more</button>
         </div>
         <div className={styles.random__card}>
           <TechCard />
         </div>
+        <button className={styles.random__btnMob}>Browse more</button>
       </section>
     </div>
   );

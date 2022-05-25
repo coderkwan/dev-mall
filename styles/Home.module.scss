@@ -42,11 +42,12 @@
     }
   }
   .about {
-    margin-bottom: 80px;
+    margin: 80px 0;
     &__box {
       display: flex;
       padding: 0;
       gap: 12px;
+      justify-content: center;
       flex-wrap: wrap;
     }
     &__individual {
@@ -93,6 +94,9 @@
       display: flex;
       justify-content: center;
     }
+    &__btnMob {
+      display: none;
+    }
   }
 }
 
@@ -107,4 +111,86 @@
   font-family: inherit;
   border-radius: 30px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    .showcase {
+      &__text {
+        width: 50%;
+        h1 {
+          font-size: 2.7rem;
+        }
+        p {
+          font-size: 1.2rem;
+        }
+      }
+      &__image {
+        width: 50%;
+      }
+    }
+    .random {
+      &__text {
+        h2 {
+          font-size: 2.2rem;
+        }
+        p {
+          font-size: 1.2rem;
+        }
+      }
+      &__card {
+      }
+    }
+  }
+}
+@media screen and (max-width: 755px) {
+  .container {
+    .showcase {
+      flex-direction: column;
+      gap: 20px;
+      &__text {
+        width: 100%;
+        h1 {
+          font-size: 2.7rem;
+        }
+        p {
+          font-size: 1.2rem;
+        }
+      }
+      &__image {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+    }
+    .about {
+      &__individual {
+        max-width: 100%;
+        min-width: 0;
+      }
+    }
+    .random {
+      flex-direction: column;
+      max-width: 100%;
+      &__text {
+        width: 100%;
+        h2 {
+          font-size: 2.2rem;
+        }
+        p {
+          font-size: 1.2rem;
+        }
+      }
+      &__card {
+        width: 100%;
+      }
+      &__btnPc {
+        display: none;
+      }
+      &__btnMob {
+        display: block;
+        width: fit-content;
+      }
+    }
+  }
 }

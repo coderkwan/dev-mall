@@ -6,6 +6,9 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { supabase } from "../../utils/supabase";
 import comment from "../../public/icons/comment.png";
+import git from "../../public/icons/githublt.png";
+import twitter from "../../public/icons/twitterlt.png";
+import internet from "../../public/icons/internetlt.png";
 
 export default function index() {
   const router = useRouter();
@@ -53,9 +56,24 @@ export default function index() {
               Realtime subscriptions and Storage.
             </p>
             <div className={styles.details__links}>
-              <Link href="/">Website</Link>
-              <Link href="/">GitHub</Link>
-              <Link href="/">Twitter</Link>
+              <a href="/">
+                <span>
+                  <Image src={internet} width={25} height={25} />
+                </span>
+                <p>Website</p>
+              </a>
+              <a href="/">
+                <span>
+                  <Image src={git} width={25} height={25} />
+                </span>
+                <p>GitHub</p>
+              </a>
+              <a href="/">
+                <span>
+                  <Image src={twitter} width={25} height={25} />
+                </span>
+                <p>Twitter</p>
+              </a>
             </div>
           </div>
         </div>

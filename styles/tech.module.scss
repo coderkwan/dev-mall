@@ -13,18 +13,22 @@
     &__details {
       margin-bottom: 50px;
       .header {
+        margin: 10px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
         h2 {
           font-size: 2rem;
-          margin: 5px 0;
+          margin: 0;
           text-transform: uppercase;
         }
         p {
           background-color: rgb(105, 72, 133);
           padding: 5px 10px;
           color: white;
+          margin: 0;
         }
         .tags {
           display: flex;
@@ -46,10 +50,19 @@
         &__links {
           display: flex;
           gap: 12px;
+          flex-wrap: wrap;
           a {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             background-color: blue;
             color: white;
             padding: 6px 12px;
+            transition: all 0.2s ease;
+            &:hover {
+              background-color: rgb(63, 63, 253);
+            }
           }
         }
       }
