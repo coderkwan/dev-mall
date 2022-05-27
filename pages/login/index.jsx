@@ -45,7 +45,7 @@ export default function Index() {
             }}
           >
             <p>
-              Don't have an account? <span>Register here!</span>
+              Don&apos;t have an account? <span>Register here!</span>
             </p>
           </div>
         </form>

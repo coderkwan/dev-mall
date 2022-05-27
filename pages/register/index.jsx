@@ -3,7 +3,7 @@ import styles from "../../styles/register.module.scss";
 import { supabase } from "../../utils/supabase";
 import { useRouter } from "next/dist/client/router";
 
-export default function index() {
+export default function Index() {
   const [loading, setLoading] = useState(false);
   const [logged, setLogged] = useState(false);
   const [done, setDone] = useState(false);
@@ -61,7 +61,7 @@ export default function index() {
       <div className={styles.formContainer}>
         {done && (
           <p className={styles.confirm}>
-            We've sent you an Email, Please go click the confirm button!
+            We&apos;ve sent you an Email, Please go click the confirm button!
           </p>
         )}
 

@@ -7,7 +7,7 @@ import git from "../../public/icons/githublt.png";
 import twitter from "../../public/icons/twitterlt.png";
 import internet from "../../public/icons/internetlt.png";
 
-export default function index({ data }) {
+export default function Index({ data }) {
   const [mydata, setData] = useState(data[0]);
   const [loggedError, setLoggedError] = useState();
 

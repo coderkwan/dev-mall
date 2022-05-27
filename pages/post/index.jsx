@@ -4,7 +4,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { supabase } from "../../utils/supabase";
 
-function index() {
+function Index() {
   const router = useRouter();
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -65,4 +65,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

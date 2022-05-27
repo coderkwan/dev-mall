@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../utils/supabase";
 import { useRouter } from "next/dist/client/router";
 
-export default function index() {
+export default function Index() {
   const router = useRouter();
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
@@ -65,7 +65,8 @@ export default function index() {
         <div className={styles.intro}>
           {data && (
             <h4>
-              Hello <span>{data.user_metadata.name}</span>, I hope you're good!
+              Hello <span>{data.user_metadata.name}</span>, I hope you&apos;re
+              good!
             </h4>
           )}
         </div>

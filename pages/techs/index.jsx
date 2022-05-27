@@ -2,7 +2,7 @@ import { supabase } from "../../utils/supabase";
 import TechCard from "../../components/TechCard";
 import styles from "../../styles/techs.module.scss";
 
-export default function index({ data }) {
+export default function Index({ data }) {
   return (
     <div className={styles.container}>
       {data && (
