@@ -11,6 +11,8 @@
     border-radius: 30px;
     cursor: pointer;
     transition: all 0.25s ease;
+    white-space: nowrap;
+    border: 1px solid black;
     &:hover {
       opacity: 0.8;
     }
@@ -39,6 +41,7 @@
     }
     &__buttons {
       display: flex;
+      flex-wrap: wrap;
       gap: 20px;
     }
   }
