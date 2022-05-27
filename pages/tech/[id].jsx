@@ -17,9 +17,9 @@ export default function index({ data }) {
     if (session) {
       try {
         const { data, error } = await supabase
-          .from("cities")
-          .update({ name: "Middle Earth" })
-          .match({ name: "Auckland" });
+          .from("tech")
+          .update({ reviews: { data: [{ name: "", review: "sucks" }] } })
+          .match({ id: data.id });
         if (data) {
         }
         throw error;
