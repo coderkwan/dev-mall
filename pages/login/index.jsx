@@ -3,7 +3,7 @@ import styles from "../../styles/register.module.scss";
 import { useRouter } from "next/dist/client/router";
 import { supabase } from "../../utils/supabase";
 
-export default function index() {
+export default function Index() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
