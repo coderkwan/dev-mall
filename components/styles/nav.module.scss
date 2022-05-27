@@ -17,6 +17,16 @@
       cursor: pointer;
       display: flex;
       align-items: center;
+      p {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+        span {
+          background-color: black;
+          color: white;
+          padding: 2px 5px;
+        }
+      }
     }
 
     &__links {

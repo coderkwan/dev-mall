@@ -64,7 +64,10 @@ function Nav() {
           <div onClick={closeMenu} className={styles.nav__logo}>
             <>
               {" "}
-              <Image src={logo} height={30} width={92.7} alt="logo" />
+              {/* <Image src={logo} height={30} width={92.7} alt="logo" /> */}
+              <p>
+                <span>dev</span>Mall
+              </p>
             </>
           </div>
         </Link>
