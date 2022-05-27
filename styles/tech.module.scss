@@ -6,8 +6,16 @@
     max-width: 800px;
     &__cover {
       height: 200px;
-      background-color: black;
+      border: 1px solid black;
       .image {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          height: 50%;
+        }
       }
     }
     /*--------------*/

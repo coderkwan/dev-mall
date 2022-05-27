@@ -10,7 +10,7 @@ function TechCard({ data }) {
   return (
     <div
       onClick={() => {
-        router.push(`/tech/${data.id}`);
+        router.push(`/tech/${data.name}`);
       }}
       className={styles.card}
     >
@@ -20,7 +20,7 @@ function TechCard({ data }) {
         <div className={styles.card__review}>
           <Image src={comment} width={20} height={20} alt="reviws" />
           <p>
-            <span>23</span> reviews
+            <span>{data.reviews || 0}</span> reviews
           </p>
         </div>
       </div>
