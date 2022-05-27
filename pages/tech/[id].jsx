@@ -41,7 +41,7 @@ export default function Index({ data }) {
           className={styles.tech__cover}
         >
           <div className={styles.image}>
-            <img src={`${mydata.banner}`} alt="" />
+            <img src={`${mydata.banner}`} alt="cover" />
           </div>
         </div>
         <div className={styles.tech__details}>
@@ -58,25 +58,34 @@ export default function Index({ data }) {
             <p>{mydata.description}</p>
             <div className={styles.details__links}>
               {mydata.link && (
-                <a target="_blank" href={`${mydata.link}`}>
+                <a rel="noreferrer" target="_blank" href={`${mydata.link}`}>
                   <span>
-                    <Image src={internet} width={25} height={25} />
+                    <Image
+                      src={internet}
+                      width={25}
+                      height={25}
+                      alt="internet"
+                    />
                   </span>
                   <p>Website</p>
                 </a>
               )}
               {mydata.repository && (
-                <a target="_blank" href={`${mydata.repository}`}>
+                <a
+                  rel="noreferrer"
+                  target="_blank"
+                  href={`${mydata.repository}`}
+                >
                   <span>
-                    <Image src={git} width={25} height={25} />
+                    <Image src={git} width={25} height={25} alt="git" />
                   </span>
                   <p>GitHub</p>
                 </a>
               )}
               {mydata.twitter && (
-                <a target="_blank" href={`${mydata.twitter}`}>
+                <a rel="noreferrer" target="_blank" href={`${mydata.twitter}`}>
                   <span>
-                    <Image src={twitter} width={25} height={25} />
+                    <Image src={twitter} width={25} height={25} alt="twitter" />
                   </span>
                   <p>Twitter</p>
                 </a>

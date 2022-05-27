@@ -38,7 +38,7 @@ function Index() {
     } else {
       setChecked(true);
     }
-  }, []);
+  }, [router]);
 
   return (
     <div className={styles.wrapper}>

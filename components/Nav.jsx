@@ -57,7 +57,7 @@ function Nav() {
     } else {
       links.current.style.display = "none";
     }
-  }, [logged, open]);
+  }, [logged, open, router]);
 
   return (
     <div className={styles.container}>
