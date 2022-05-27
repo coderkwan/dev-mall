@@ -26,7 +26,7 @@ export default function index() {
       );
       if (user) {
         setDone(true);
-        router.reload();
+        // router.reload();
       }
       if (error) throw error;
     } catch (error) {

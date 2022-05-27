@@ -1,24 +1,11 @@
 import { supabase } from "../../utils/supabase";
-import { useEffect, useState } from "react";
 import TechCard from "../../components/TechCard";
-import { useQuery } from "react-query";
+import styles from "../../styles/techs.module.scss";
 
-export default function index() {
-  const [mydata, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  function fetchData() {
-    return supabase.from("tech").select();
-  }
-  const { isLoading, data, isError } = useQuery("techs", fetchData);
-
-  useEffect(() => {
-    // fetchData();
-  }, []);
-
+export default function index({ data }) {
   return (
-    <div>
-      {data ? (
+    <div className={styles.container}>
+      {data && (
         <div
           style={{
             display: "flex",
@@ -27,18 +14,21 @@ export default function index() {
             justifyContent: "center",
           }}
         >
-          {data.data.length > 0 &&
-            data.data.map((item, index) => {
-              return <TechCard id={item.id} key={index} />;
+          {data.length > 0 &&
+            data.map((item, index) => {
+              return <TechCard data={item} key={index} />;
             })}
         </div>
-      ) : isLoading ? (
-        <p>loading....</p>
-      ) : isError ? (
-        <p>Error</p>
-      ) : (
-        <></>
       )}
     </div>
   );
 }
+
+export const getStaticProps = async () => {
+  const { data, error } = await supabase.from("tech").select();
+  return {
+    props: {
+      data,
+    },
+  };
+};

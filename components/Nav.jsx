@@ -33,7 +33,7 @@ function Nav() {
     }
   }
 
-  async function checkSession() {
+  function checkSession() {
     try {
       const session = supabase.auth.session();
       if (session) {
@@ -47,13 +47,17 @@ function Nav() {
   }
 
   useEffect(() => {
-    checkSession();
+    const session = supabase.auth.session();
+    if (session) {
+      setLogged(true);
+    } else {
+    }
     if (open) {
       links.current.style.display = "flex";
     } else {
       links.current.style.display = "none";
     }
-  }, [open]);
+  }, [logged, open]);
 
   return (
     <div className={styles.container}>

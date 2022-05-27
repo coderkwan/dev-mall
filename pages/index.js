@@ -4,9 +4,8 @@ import illustration from "../public/images/png.png";
 import TechCard from "../components/TechCard";
 import { useRouter } from "next/router";
 import { supabase } from "../utils/supabase";
-import { useEffect } from "react";
 
-export default function Home() {
+export default function Home({ data }) {
   const router = useRouter();
   return (
     <div className={styles.container}>
@@ -75,10 +74,19 @@ export default function Home() {
           <button className={styles.random__btnPc}>Browse more</button>
         </div>
         <div className={styles.random__card}>
-          <TechCard />
+          <TechCard data={data[0]} />
         </div>
         <button className={styles.random__btnMob}>Browse more</button>
       </section>
     </div>
   );
 }
+
+export const getStaticProps = async () => {
+  const { data, error } = await supabase.from("tech").select().eq("id", 1);
+  return {
+    props: {
+      data,
+    },
+  };
+};
