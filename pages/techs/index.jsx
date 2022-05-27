@@ -9,7 +9,7 @@ export default function index({ data }) {
         <div
           style={{
             display: "flex",
-            gap: 12,
+            gap: 30,
             flexWrap: "wrap",
             justifyContent: "center",
           }}

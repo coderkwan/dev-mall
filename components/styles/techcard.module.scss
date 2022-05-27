@@ -5,7 +5,6 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
-  height: fit-content;
   cursor: pointer;
   transition: all 0.2s ease;
   &:hover {
@@ -17,7 +16,7 @@
   }
   &__hearder {
     h4 {
-      font-size: 2rem;
+      font-size: 1.4rem;
       margin: 0;
       text-transform: uppercase;
     }
@@ -38,7 +37,14 @@
   }
   &__image {
     height: 180px;
+    width: 100%;
     background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 50%;
+    }
   }
   &__category {
     background-color: blue;

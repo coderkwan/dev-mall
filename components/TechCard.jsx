@@ -14,7 +14,14 @@ function TechCard({ data }) {
       }}
       className={styles.card}
     >
-      <div className={styles.card__image}></div>
+      <div
+        style={{
+          backgroundColor: data.bg ? "rgb(234, 236, 250)" : "black",
+        }}
+        className={styles.card__image}
+      >
+        <img src={`${data.banner}`} alt="" />
+      </div>
       <div className={styles.card__hearder}>
         <h4>{data.name}</h4>
         <div className={styles.card__review}>

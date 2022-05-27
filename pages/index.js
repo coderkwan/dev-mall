@@ -71,12 +71,26 @@ export default function Home({ data }) {
             You can see reviews on your favourite tech, you can also drop a
             review
           </p>
-          <button className={styles.random__btnPc}>Browse more</button>
+          <button
+            onClick={() => {
+              router.push("/techs");
+            }}
+            className={styles.random__btnPc}
+          >
+            Browse more
+          </button>
         </div>
         <div className={styles.random__card}>
           <TechCard data={data[0]} />
         </div>
-        <button className={styles.random__btnMob}>Browse more</button>
+        <button
+          onClick={() => {
+            router.push("/techs");
+          }}
+          className={styles.random__btnMob}
+        >
+          Browse more
+        </button>
       </section>
     </div>
   );
