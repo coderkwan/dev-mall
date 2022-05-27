@@ -2,8 +2,6 @@ import styles from "./styles/nav.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../public/devmall.webp";
-import menu from "../public/icons/menudk.png";
-import close from "../public/icons/close.png";
 import { supabase } from "../utils/supabase";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
@@ -110,9 +108,9 @@ function Nav() {
         <div className={styles.nav__Moblinks}>
           <div onClick={openMenu} className={styles.menu}>
             {!open ? (
-              <Image src={menu} width={30} height={30} alt="menu" />
+              <p style={{ margin: 0 }}>MENU</p>
             ) : (
-              <Image src={close} width={30} height={30} alt="menu" />
+              <p style={{ margin: 0 }}>CLOSE</p>
             )}
           </div>
           <div ref={links} className={styles.mobileLinks}>
