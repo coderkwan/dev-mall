@@ -8,6 +8,7 @@ function index() {
   const router = useRouter();
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   async function recommend(e) {
     e.preventDefault();
@@ -34,26 +35,32 @@ function index() {
     const session = supabase.auth.session();
     if (!session) {
       router.push("/login");
+    } else {
+      setChecked(true);
     }
   }, []);
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.container}>
-        <h3>Recommed a Library or framework or technology we should list.</h3>
-        <form onSubmit={recommend}>
-          <div className={styles.inputAndLabel}>
-            <label htmlFor="">Name</label>
-            <input required={true} type="text" name="name" />
-          </div>
-          <div className={styles.inputAndLabel}>
-            <label htmlFor="">Website</label>
-            <input required={true} type="url" name="website" />
-          </div>
-          {done && <p>Recommendation submited sucessfully!</p>}
-          <button type="submit">{loading ? "Loading..." : "Submit"}</button>
-        </form>
-      </div>
+      {checked ? (
+        <div className={styles.container}>
+          <h3>Recommed a Library or framework or technology we should list.</h3>
+          <form onSubmit={recommend}>
+            <div className={styles.inputAndLabel}>
+              <label htmlFor="">Name</label>
+              <input required={true} type="text" name="name" />
+            </div>
+            <div className={styles.inputAndLabel}>
+              <label htmlFor="">Website</label>
+              <input required={true} type="url" name="website" />
+            </div>
+            {done && <p>Recommendation submited sucessfully!</p>}
+            <button type="submit">{loading ? "Loading..." : "Submit"}</button>
+          </form>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

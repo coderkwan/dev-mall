@@ -58,11 +58,14 @@ function Nav() {
   return (
     <div className={styles.container}>
       <div className={styles.nav}>
-        <div onClick={closeMenu} className={styles.nav__logo}>
-          <Link href="/">
-            <Image src={logo} height={30} width={92.7} alt="logo" />
-          </Link>
-        </div>
+        <Link href="/">
+          <div onClick={closeMenu} className={styles.nav__logo}>
+            <>
+              {" "}
+              <Image src={logo} height={30} width={92.7} alt="logo" />
+            </>
+          </div>
+        </Link>
         <div className={styles.nav__links}>
           <Link href="/techs">
             <div className={styles.nav__link}>
