@@ -150,7 +150,10 @@ function Nav() {
               ) : (
                 <>
                   <Link href="/profile">
-                    <div className={styles.mobileLinks__link}>
+                    <div
+                      onClick={closeMenu}
+                      className={styles.mobileLinks__link}
+                    >
                       <p>Profile</p>
                     </div>
                   </Link>
