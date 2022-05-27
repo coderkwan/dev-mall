@@ -1,7 +1,7 @@
 import styles from "./styles/nav.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../public/devmall.png";
+import logo from "../public/devmall.webp";
 import menu from "../public/icons/menudk.png";
 import close from "../public/icons/close.png";
 import { supabase } from "../utils/supabase";
