@@ -3,6 +3,9 @@
   min-height: 100vh;
   justify-content: center;
   .tech {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     max-width: 800px;
     width: 100%;
     &__cover {
@@ -28,7 +31,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 10px;
+        gap: 20px;
         flex-wrap: wrap;
         h2 {
           font-size: 2rem;
@@ -40,6 +43,7 @@
           padding: 5px 10px;
           color: white;
           margin: 0;
+          font-size: 1.1rem;
         }
         .tags {
           display: flex;
