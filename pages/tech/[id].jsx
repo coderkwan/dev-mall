@@ -50,6 +50,8 @@ export default function Index({ data }) {
         setMyReviews(filtered);
 
         try {
+          e.target.review.value = "";
+          setRatingValue(0);
           const { data, error } = await supabase
             .from("tech")
             .update({
