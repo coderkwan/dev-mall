@@ -1,6 +1,4 @@
 import styles from "./styles/techcard.module.scss";
-import Image from "next/image";
-import comment from "../public/icons/comment.png";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { Rating } from "react-simple-star-rating";
@@ -12,9 +10,11 @@ function TechCard({ data }) {
   const [myArr, setMyArr] = useState([]);
 
   useEffect(() => {
+    const listed = [];
     myReviews.map((item) => {
-      setMyArr([...myArr, item.stars]);
+      listed.push(item.rating);
     });
+    setMyArr(listed);
   }, []);
 
   const [mylist, setList] = useState(data.tags.tags);

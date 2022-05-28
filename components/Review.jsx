@@ -8,7 +8,7 @@ function Review({ item }) {
       <div className={styles.comments__hearder}>
         <div className={styles.ratings}>
           <Rating
-            initialValue={item.stars}
+            initialValue={item.rating}
             emptyColor="rgb(26, 26, 68)"
             size={25}
             readonly={true}

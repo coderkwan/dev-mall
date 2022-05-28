@@ -6,18 +6,20 @@ import comment from "../../public/icons/comment.png";
 import { Rating } from "react-simple-star-rating";
 import Review from "../../components/Review";
 import Links from "../../components/Links";
+import { useRouter } from "next/dist/client/router";
 import { useEffect } from "react";
 
 export default function Index({ data }) {
+  const router = useRouter();
   const nowDate = new Date();
   const [mydata, setData] = useState(data[0]);
   const [loggedError, setLoggedError] = useState(false);
   const [ratingError, setRatingError] = useState(false);
+  const [myArr, setMyArr] = useState([]);
+  const [ratingValue, setRatingValue] = useState(0);
   const [myReviews, setMyReviews] = useState(
     mydata.reviews ? mydata.reviews.data : []
   );
-  const [myArr, setMyArr] = useState([]);
-  const [ratingValue, setRatingValue] = useState(0);
 
   const handleRating = (rate) => {
     setRatingValue(rate / 20);
@@ -25,42 +27,48 @@ export default function Index({ data }) {
 
   async function postComment(e) {
     e.preventDefault();
-    const session = supabase.auth.session();
 
-    if (session) {
-      if (ratingValue === 0) {
-        setRatingError(true);
-      } else {
+    if (supabase.auth.session()) {
+      if (ratingValue > 0) {
         setRatingError(false);
-        const date = nowDate.toDateString();
 
         const details = {
-          name: session.user.user_metadata.name,
-          data: date,
+          name: supabase.auth.session().user.user_metadata.name,
+          date: nowDate.toDateString(),
           rating: ratingValue,
           data: e.target.review.value,
         };
 
-        setMyReviews([...myReviews, details]);
+        const testArray = [...myReviews];
+        const filtered = testArray.filter((item) => {
+          if (item.name != supabase.auth.session().user.user_metadata.name) {
+            return item;
+          }
+        });
 
-        const reviewsObject = {
-          data: myReviews,
-        };
-        console.log(JSON.stringify(reviewsObject));
+        filtered.push(details);
+        setMyReviews(filtered);
+
         try {
           const { data, error } = await supabase
             .from("tech")
             .update({
-              name: "hell",
+              reviews: {
+                data: filtered,
+              },
             })
-            .match({ id: 1 });
+            .match({ id: mydata.id });
           if (data) {
             console.log("done", data);
           }
-          throw error;
+          if (error) {
+            throw error;
+          }
         } catch (error) {
           console.log("err", error);
         }
+      } else {
+        setRatingError(true);
       }
     } else {
       setLoggedError(true);
@@ -68,9 +76,11 @@ export default function Index({ data }) {
   }
 
   useEffect(() => {
+    const listed = [];
     myReviews.map((item) => {
-      setMyArr([...myArr, item.stars]);
+      listed.push(item.rating);
     });
+    setMyArr(listed);
   }, []);
 
   return (
@@ -105,8 +115,10 @@ export default function Index({ data }) {
               <p>Reviews</p>
               <Rating
                 initialValue={
-                  myArr.reduce((partialSum, a) => partialSum + a, 0) /
-                  myArr.length
+                  myArr.length > 0
+                    ? myArr.reduce((partialSum, a) => partialSum + a, 0) /
+                      myArr.length
+                    : 0
                 }
                 emptyColor="rgb(26, 26, 68)"
                 size={25}
@@ -126,7 +138,9 @@ export default function Index({ data }) {
             emptyColor="rgb(26, 26, 68)"
             tooltipArray={["Terrible", "Bad", "Average", "Great", "Prefect"]}
           />
+
           {ratingError && <small>Please select your rating!</small>}
+
           <form onSubmit={postComment} className={styles.post}>
             <input
               required={true}
@@ -151,17 +165,6 @@ export default function Index({ data }) {
   );
 }
 
-// export const getStaticProps = async ({ params }) => {
-//   const { data, error } = await supabase
-//     .from("tech")
-//     .select()
-//     .eq("name", `${params.id}`);
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// };
 export const getServerSideProps = async ({ params }) => {
   const { data, error } = await supabase
     .from("tech")
@@ -173,16 +176,3 @@ export const getServerSideProps = async ({ params }) => {
     },
   };
 };
-
-// export const getStaticPaths = async () => {
-//   const { data, error } = await supabase.from("tech").select();
-
-//   const paths = data.map((item) => ({
-//     params: { id: item.name },
-//   }));
-
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// };
