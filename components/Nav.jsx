@@ -125,7 +125,7 @@ function Nav() {
               </Link>
               <Link href="/post">
                 <div onClick={closeMenu} className={styles.mobileLinks__link}>
-                  <p>Post tech</p>
+                  <p>Recommend</p>
                 </div>
               </Link>
               {!logged ? (
