@@ -3,7 +3,6 @@ import Image from "next/image";
 import { useState } from "react";
 import { supabase } from "../../utils/supabase";
 import comment from "../../public/icons/comment.png";
-import uploadComment from "../../utils/usePostReview";
 import { Rating } from "react-simple-star-rating";
 import Review from "../../components/Review";
 import Links from "../../components/Links";
@@ -21,7 +20,7 @@ export default function Index({ data }) {
   const [ratingValue, setRatingValue] = useState(0);
 
   const handleRating = (rate) => {
-    console.log(rate / 20);
+    setRatingValue(rate / 20);
   };
 
   async function postComment(e) {
@@ -34,7 +33,34 @@ export default function Index({ data }) {
       } else {
         setRatingError(false);
         const date = nowDate.toDateString();
-        // await uploadComment()
+
+        const details = {
+          name: session.user.user_metadata.name,
+          data: date,
+          rating: ratingValue,
+          data: e.target.review.value,
+        };
+
+        setMyReviews([...myReviews, details]);
+
+        const reviewsObject = {
+          data: myReviews,
+        };
+        console.log(JSON.stringify(reviewsObject));
+        try {
+          const { data, error } = await supabase
+            .from("tech")
+            .update({
+              name: "hell",
+            })
+            .match({ id: 1 });
+          if (data) {
+            console.log("done", data);
+          }
+          throw error;
+        } catch (error) {
+          console.log("err", error);
+        }
       }
     } else {
       setLoggedError(true);
@@ -102,13 +128,18 @@ export default function Index({ data }) {
           />
           {ratingError && <small>Please select your rating!</small>}
           <form onSubmit={postComment} className={styles.post}>
-            <input required={true} type="text" placeholder="Type your review" />
+            <input
+              required={true}
+              type="text"
+              name="review"
+              placeholder="Type your review"
+            />
             <button type="submit">Post</button>
           </form>
           <div className={styles.comments}>
             {myReviews.length > 0 ? (
               myReviews.map((item, key) => {
-                return <Review item={item} />;
+                return <Review key={key} item={item} />;
               })
             ) : (
               <></>

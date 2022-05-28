@@ -3,9 +3,10 @@ import Nav from "../components/Nav";
 
 import styles from "../styles/layout.module.scss";
 import { useRouter } from "next/router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Layout({ children }) {
+  const [isServer, setIsServer] = useState(true);
   const loarder = useRef();
   const router = useRouter();
 
