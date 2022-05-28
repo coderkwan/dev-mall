@@ -4,8 +4,15 @@ import illustration from "../public/images/png.png";
 import TechCard from "../components/TechCard";
 import { useRouter } from "next/router";
 import { supabase } from "../utils/supabase";
+import { useQuery } from "react-query";
 
-export default function Home({ data }) {
+export default function Home() {
+  const fetcher = async () => {
+    const { data, error } = await supabase.from("tech").select().eq("id", 1);
+    return data;
+  };
+  const { isLoading, data, isError } = useQuery("weekly", fetcher);
+
   const router = useRouter();
   return (
     <div className={styles.container}>
@@ -81,7 +88,7 @@ export default function Home({ data }) {
           </button>
         </div>
         <div className={styles.random__card}>
-          <TechCard data={data[0]} />
+          {data ? <TechCard data={data[0]} /> : <p>Loading...</p>}
         </div>
         <button
           onClick={() => {
@@ -95,12 +102,3 @@ export default function Home({ data }) {
     </div>
   );
 }
-
-export const getStaticProps = async () => {
-  const { data, error } = await supabase.from("tech").select().eq("id", 1);
-  return {
-    props: {
-      data,
-    },
-  };
-};
