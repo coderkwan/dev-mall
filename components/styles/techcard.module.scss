@@ -17,6 +17,9 @@
     color: rgb(44, 42, 46);
   }
   &__hearder {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
     h4 {
       font-size: 1.4rem;
       margin: 0;
@@ -36,6 +39,8 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
   }
   &__image {
     height: 180px;

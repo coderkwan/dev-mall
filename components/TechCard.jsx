@@ -2,9 +2,21 @@ import styles from "./styles/techcard.module.scss";
 import Image from "next/image";
 import comment from "../public/icons/comment.png";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Rating } from "react-simple-star-rating";
 
 function TechCard({ data }) {
+  const [myReviews, setMyReviews] = useState(
+    data.reviews ? data.reviews.data : []
+  );
+  const [myArr, setMyArr] = useState([]);
+
+  useEffect(() => {
+    myReviews.map((item) => {
+      setMyArr([...myArr, item.stars]);
+    });
+  }, []);
+
   const [mylist, setList] = useState(data.tags.tags);
   const router = useRouter();
   return (
@@ -24,10 +36,20 @@ function TechCard({ data }) {
       </div>
       <div className={styles.card__hearder}>
         <h4>{data.name}</h4>
+        <Rating
+          initialValue={
+            myArr.length > 0
+              ? myArr.reduce((partialSum, a) => partialSum + a, 0) /
+                myArr.length
+              : 0
+          }
+          emptyColor="rgb(26, 26, 68)"
+          size={25}
+          readonly={true}
+        />
         <div className={styles.card__review}>
-          <Image src={comment} width={20} height={20} alt="reviws" />
           <p>
-            <span>{data.reviews || 0}</span> reviews
+            <span>{data.reviews ? data.reviews.data.length : 0}</span> reviews
           </p>
         </div>
       </div>
