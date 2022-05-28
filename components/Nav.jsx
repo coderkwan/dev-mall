@@ -1,7 +1,5 @@
 import styles from "./styles/nav.module.scss";
-import Image from "next/image";
 import Link from "next/link";
-import logo from "../public/devmall.webp";
 import { supabase } from "../utils/supabase";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
@@ -31,19 +29,6 @@ function Nav() {
     }
   }
 
-  function checkSession() {
-    try {
-      const session = supabase.auth.session();
-      if (session) {
-        setLogged(true);
-        return true;
-      }
-      return false;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   useEffect(() => {
     const session = supabase.auth.session();
     if (session) {
@@ -63,8 +48,6 @@ function Nav() {
         <Link href="/">
           <div onClick={closeMenu} className={styles.nav__logo}>
             <>
-              {" "}
-              {/* <Image src={logo} height={30} width={92.7} alt="logo" /> */}
               <p>
                 <span>dev</span>Mall
               </p>
