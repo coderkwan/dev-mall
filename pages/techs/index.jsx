@@ -8,14 +8,10 @@ import { useRef, useState } from "react";
 import {
   categoriesHandler,
   deleteTagHandler,
-  ratingsHandler,
   selectTagHandler,
 } from "../../utils/filter";
 
 export default function Index() {
-  const ascending = useRef();
-  const descending = useRef();
-
   const database = useRef();
   const orm = useRef();
   const server = useRef();
@@ -25,17 +21,14 @@ export default function Index() {
 
   const filterForm = useRef();
 
+  const { isLoading, data, isError } = useQuery("techs", allTechFetcher);
   const [filterFormOpen, setFilterFormOpen] = useState();
-  const [rating, setRating] = useState(null);
+  const [filteredData, setFilteredData] = useState(data || []);
   const [tags, setTags] = useState([]);
   const [categories, setCategories] = useState([]);
 
   function openFilterForm() {
     setFilterFormOpen(!filterFormOpen);
-  }
-
-  function selectRating(e) {
-    ratingsHandler(e, ascending, descending, setRating);
   }
 
   function selectCategory(e) {
@@ -50,7 +43,7 @@ export default function Index() {
     deleteTagHandler(e, tags, setTags);
   }
 
-  const { isLoading, data, isError } = useQuery("techs", allTechFetcher);
+  function filterData() {}
 
   return (
     <div className={styles.container}>
@@ -62,17 +55,6 @@ export default function Index() {
         {filterFormOpen && (
           <div ref={filterForm} className={styles.filter__form}>
             <div className={styles.filter__top}>
-              <div className={styles.rating}>
-                <h4>Rating</h4>
-                <div onClick={selectRating} className={styles.rating__each}>
-                  <div ref={ascending} className={styles.radioButton}></div>
-                  <p>Ascending</p>
-                </div>
-                <div onClick={selectRating} className={styles.rating__each}>
-                  <div ref={descending} className={styles.radioButton}></div>
-                  <p>Descending</p>
-                </div>
-              </div>
               <div className={styles.category}>
                 <h4>Category</h4>
                 <div onClick={selectCategory} className={styles.category__each}>
@@ -126,7 +108,7 @@ export default function Index() {
                 <button onClick={openFilterForm} className={styles.cancel}>
                   Cancel
                 </button>
-                <button>Save</button>
+                <button onClick={openFilterForm}>Save</button>
               </div>
             </div>
           </div>

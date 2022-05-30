@@ -55,31 +55,6 @@ export function categoriesHandler(
   }
 }
 
-export function ratingsHandler(event, ascending, descending, setRating) {
-  switch (event.target.innerText) {
-    case "Ascending":
-      if (ascending.current.style.backgroundColor != "dodgerblue") {
-        ascending.current.style.backgroundColor = "dodgerblue";
-        descending.current.style.backgroundColor = "transparent";
-      } else {
-        ascending.current.style.backgroundColor = "transparent";
-      }
-      setRating("Ascending");
-      return;
-    case "Descending":
-      if (descending.current.style.backgroundColor != "dodgerblue") {
-        descending.current.style.backgroundColor = "dodgerblue";
-        ascending.current.style.backgroundColor = "transparent";
-      } else {
-        descending.current.style.backgroundColor = "transparent";
-      }
-      setRating("Descending");
-      return;
-    default:
-      return;
-  }
-}
-
 export function selectTagHandler(e, tags, setTags) {
   e.preventDefault();
   if (e.target.tag.value.length > 2) {
