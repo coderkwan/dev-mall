@@ -133,7 +133,6 @@ export default function Index({ data }) {
           {loggedError && <small>Please login to post a review!</small>}
           <Rating
             showTooltip
-            transition
             size={25}
             onClick={handleRating}
             ratingValue={ratingValue}

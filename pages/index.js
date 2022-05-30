@@ -6,13 +6,7 @@ import { useRouter } from "next/router";
 import { supabase } from "../utils/supabase";
 import { useQuery } from "react-query";
 
-export default function Home() {
-  const fetcher = async () => {
-    const { data, error } = await supabase.from("tech").select().eq("id", 1);
-    return data;
-  };
-  const { isLoading, data, isError } = useQuery("weekly", fetcher);
-
+export default function Home({ data }) {
   const router = useRouter();
   return (
     <div className={styles.container}>
@@ -102,3 +96,12 @@ export default function Home() {
     </div>
   );
 }
+
+export const getStaticProps = async () => {
+  const { data, error } = await supabase.from("tech").select().eq("id", 1);
+  return {
+    props: {
+      data,
+    },
+  };
+};
