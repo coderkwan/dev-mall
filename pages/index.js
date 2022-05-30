@@ -4,7 +4,6 @@ import illustration from "../public/images/png.png";
 import TechCard from "../components/TechCard";
 import { useRouter } from "next/router";
 import { supabase } from "../utils/supabase";
-import { useQuery } from "react-query";
 
 export default function Home({ data }) {
   const router = useRouter();
