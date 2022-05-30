@@ -25,9 +25,10 @@ export default function Index() {
 
   const filterForm = useRef();
 
-  const [rating, setRating] = useState(false);
   const [filterFormOpen, setFilterFormOpen] = useState();
+  const [rating, setRating] = useState(null);
   const [tags, setTags] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   function openFilterForm() {
     setFilterFormOpen(!filterFormOpen);
