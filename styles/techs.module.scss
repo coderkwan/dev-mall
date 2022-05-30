@@ -45,6 +45,7 @@
       justify-content: space-between;
       margin-bottom: 20px;
       flex-wrap: wrap;
+      gap: 20px;
       // padding: 20px;
       h4 {
         margin: 5px 0;
@@ -52,28 +53,6 @@
       p {
         margin: 0;
         font-size: 0.9rem;
-      }
-      .rating {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        &__each {
-          cursor: pointer;
-          display: flex;
-          gap: 12px;
-          align-items: center;
-          .radioButton {
-            background-color: transparent;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            border: 1px solid rgb(119, 142, 219);
-          }
-          transition: all 0.2s ease;
-          &:hover {
-            opacity: 0.5;
-          }
-        }
       }
       .category {
         display: flex;
