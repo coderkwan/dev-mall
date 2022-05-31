@@ -47,7 +47,7 @@ export default function Index() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.filter}>
+      {/* <div className={styles.filter}>
         <div onClick={openFilterForm} className={styles.filter__button}>
           <p>Filter</p>
           <Image src={slider} alt="filter" width={25} height={25} />
@@ -113,7 +113,7 @@ export default function Index() {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
       <div className={styles.cardContainer}>
         {data ? (
           data && (
