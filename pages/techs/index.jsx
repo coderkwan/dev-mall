@@ -4,12 +4,8 @@ import styles from "../../styles/techs.module.scss";
 import { useQuery } from "react-query";
 import slider from "../../public/icons/slider.png";
 import Image from "next/image";
-import { useRef, useState } from "react";
-import {
-  categoriesHandler,
-  deleteTagHandler,
-  selectTagHandler,
-} from "../../utils/filter";
+import { useRef, useState, useEffect } from "react";
+import { categoriesHandler } from "../../utils/filter";
 
 export default function Index() {
   const database = useRef();
@@ -18,36 +14,87 @@ export default function Index() {
   const library = useRef();
   const framework = useRef();
   const tool = useRef();
-
   const filterForm = useRef();
+
+  const [filtering, setFiltering] = useState(false);
+
+  const [serverSelected, setServerSelected] = useState(false);
+  const [databaseSelected, setDatabaseSelected] = useState(false);
+  const [frameworkSelected, setFrameworkSelected] = useState(false);
+  const [toolSelected, setToolSelected] = useState(false);
+  const [librarySelected, setLibrarySelected] = useState(false);
+  const [ORMSelected, setORMSelected] = useState(false);
 
   const { isLoading, data, isError } = useQuery("techs", allTechFetcher);
   const [filterFormOpen, setFilterFormOpen] = useState();
-  const [filteredData, setFilteredData] = useState(data || []);
-  const [tags, setTags] = useState([]);
+  const [filteredData, setFilteredData] = useState(data);
   const [categories, setCategories] = useState([]);
 
   function openFilterForm() {
     setFilterFormOpen(!filterFormOpen);
   }
 
-  function selectCategory(e) {
-    categoriesHandler(e, orm, server, database, framework, library, tool);
+  function selectCategory(event) {
+    categoriesHandler(
+      event,
+      orm,
+      server,
+      database,
+      framework,
+      library,
+      tool,
+      categories,
+      setCategories,
+      serverSelected,
+      setServerSelected,
+      databaseSelected,
+      setDatabaseSelected,
+      frameworkSelected,
+      setFrameworkSelected,
+      toolSelected,
+      setToolSelected,
+      librarySelected,
+      setLibrarySelected,
+      ORMSelected,
+      setORMSelected
+    );
   }
 
-  function selectTag(e) {
-    selectTagHandler(e, tags, setTags);
+  function filterData() {
+    setFiltering(true);
   }
 
-  function deleteTag(e) {
-    deleteTagHandler(e, tags, setTags);
+  function clearFilters() {
+    setFiltering(false);
+
+    setDatabaseSelected(false);
+    setORMSelected(false);
+    setServerSelected(false);
+    setFrameworkSelected(false);
+    setToolSelected(false);
+    setLibrarySelected(false);
+
+    setCategories([]);
+    setFilterFormOpen(false);
   }
 
-  function filterData() {}
+  useEffect(() => {
+    console.log(categories);
+
+    if (categories.length > 0) {
+      setFilteredData(
+        data.filter((item) => {
+          if (categories.includes(item.category)) {
+            return item;
+          }
+        })
+      );
+    }
+  }, [categories]);
 
   return (
     <div className={styles.container}>
-      {/* <div className={styles.filter}>
+      <div className={styles.filter}>
         <div onClick={openFilterForm} className={styles.filter__button}>
           <p>Filter</p>
           <Image src={slider} alt="filter" width={25} height={25} />
@@ -56,64 +103,94 @@ export default function Index() {
           <div ref={filterForm} className={styles.filter__form}>
             <div className={styles.filter__top}>
               <div className={styles.category}>
-                <h4>Category</h4>
                 <div onClick={selectCategory} className={styles.category__each}>
-                  <div ref={server} className={styles.checkBox}></div>
+                  <div
+                    ref={server}
+                    style={
+                      serverSelected
+                        ? { backgroundColor: "dodgerblue" }
+                        : { backgroundColor: "transparent" }
+                    }
+                    className={styles.checkBox}
+                  ></div>
                   <p>Server</p>
                 </div>
                 <div onClick={selectCategory} className={styles.category__each}>
-                  <div ref={orm} className={styles.checkBox}></div>
+                  <div
+                    ref={orm}
+                    style={
+                      ORMSelected
+                        ? { backgroundColor: "dodgerblue" }
+                        : { backgroundColor: "transparent" }
+                    }
+                    className={styles.checkBox}
+                  ></div>
                   <p>ORM</p>
                 </div>
                 <div onClick={selectCategory} className={styles.category__each}>
-                  <div ref={database} className={styles.checkBox}></div>
+                  <div
+                    ref={database}
+                    style={
+                      databaseSelected
+                        ? { backgroundColor: "dodgerblue" }
+                        : { backgroundColor: "transparent" }
+                    }
+                    className={styles.checkBox}
+                  ></div>
                   <p>Database</p>
                 </div>
                 <div onClick={selectCategory} className={styles.category__each}>
-                  <div ref={library} className={styles.checkBox}></div>
+                  <div
+                    ref={library}
+                    style={
+                      librarySelected
+                        ? { backgroundColor: "dodgerblue" }
+                        : { backgroundColor: "transparent" }
+                    }
+                    className={styles.checkBox}
+                  ></div>
                   <p>Library</p>
                 </div>
                 <div onClick={selectCategory} className={styles.category__each}>
-                  <div ref={framework} className={styles.checkBox}></div>
+                  <div
+                    ref={framework}
+                    style={
+                      frameworkSelected
+                        ? { backgroundColor: "dodgerblue" }
+                        : { backgroundColor: "transparent" }
+                    }
+                    className={styles.checkBox}
+                  ></div>
                   <p>Framework</p>
                 </div>
                 <div onClick={selectCategory} className={styles.category__each}>
-                  <div ref={tool} className={styles.checkBox}></div>
+                  <div
+                    ref={tool}
+                    style={
+                      toolSelected
+                        ? { backgroundColor: "dodgerblue" }
+                        : { backgroundColor: "transparent" }
+                    }
+                    className={styles.checkBox}
+                  ></div>
                   <p>Tool</p>
-                </div>
-              </div>
-              <div className={styles.tags}>
-                <h4>Tag</h4>
-                <form onSubmit={selectTag} className={styles.tags__form}>
-                  <input name="tag" type="text" />
-                  <button type="submit">Add</button>
-                </form>
-                <div className={styles.tags__list}>
-                  {tags.length > 0 &&
-                    tags.map((item, index) => {
-                      return (
-                        <p onClick={deleteTag} key={index}>
-                          {item}
-                        </p>
-                      );
-                    })}
                 </div>
               </div>
             </div>
             <div className={styles.filter__bottom}>
-              <button onClick={openFilterForm} className={styles.clear}>
-                Clear Filters
+              <button onClick={openFilterForm} className={styles.cancel}>
+                Close
               </button>
               <div className={styles.right}>
-                <button onClick={openFilterForm} className={styles.cancel}>
-                  Cancel
+                <button onClick={clearFilters} className={styles.clear}>
+                  Clear Filters
                 </button>
-                <button onClick={openFilterForm}>Save</button>
+                <button onClick={filterData}>Filter</button>
               </div>
             </div>
           </div>
         )}
-      </div> */}
+      </div>
       <div className={styles.cardContainer}>
         {data ? (
           data && (
@@ -125,10 +202,15 @@ export default function Index() {
                 justifyContent: "center",
               }}
             >
-              {data.length > 0 &&
-                data.map((item, index) => {
-                  return <TechCard data={item} key={index} />;
-                })}
+              {!filtering
+                ? data.length > 0 &&
+                  data.map((item, index) => {
+                    return <TechCard data={item} key={index} />;
+                  })
+                : data.length > 0 &&
+                  filteredData.map((item, index) => {
+                    return <TechCard data={item} key={index} />;
+                  })}
             </div>
           )
         ) : (
