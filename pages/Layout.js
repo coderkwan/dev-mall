@@ -14,9 +14,6 @@ export default function Layout({ children }) {
   function bodyClicked() {
     if (navOpened) {
       setNavOpened(false);
-      console.log("menu closed");
-    } else {
-      console.log("menu NOT opened");
     }
   }
 
