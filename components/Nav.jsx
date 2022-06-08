@@ -2,7 +2,8 @@ import styles from "./styles/nav.module.scss";
 import Link from "next/link";
 import { supabase } from "../utils/supabase";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useContext, useRef, useState } from "react";
+import { closeNavBar } from "../context/closeNavBar";
 
 function Nav() {
   const router = useRouter();
@@ -10,8 +11,15 @@ function Nav() {
   const [logged, setLogged] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const { navOpened, setNavOpened } = useContext(closeNavBar);
+
   function openMenu() {
-    setOpen(!open);
+    if (open) {
+      setOpen(false);
+    } else {
+      setNavOpened(true);
+      setOpen(true);
+    }
   }
   function closeMenu() {
     setOpen(false);
@@ -30,6 +38,10 @@ function Nav() {
   }
 
   useEffect(() => {
+    if (!navOpened) {
+      closeMenu();
+    }
+
     const session = supabase.auth.session();
     if (session) {
       setLogged(true);
@@ -40,7 +52,7 @@ function Nav() {
     } else {
       links.current.style.display = "none";
     }
-  }, [logged, open, router]);
+  }, [logged, open, router, navOpened]);
 
   return (
     <div className={styles.container}>
