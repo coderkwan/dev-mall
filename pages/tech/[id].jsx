@@ -34,7 +34,8 @@ export default function Index({ data }) {
       ratingValue,
       setMyReviews,
       setRatingError,
-      setRatingValue
+      setRatingValue,
+      setLoggedError
     );
   }
 

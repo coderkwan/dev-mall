@@ -1,6 +1,6 @@
 import { supabase } from "./supabase";
 
-export default async function (
+export default async function review(
   e,
   mydata,
   nowDate,
@@ -8,7 +8,8 @@ export default async function (
   ratingValue,
   setMyReviews,
   setRatingError,
-  setRatingValue
+  setRatingValue,
+  setLoggedError
 ) {
   if (supabase.auth.session()) {
     if (ratingValue > 0) {
